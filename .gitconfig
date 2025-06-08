@@ -1,0 +1,18 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Jason Davis
+  email = creel22@hotmail.com
+	#email = 854953+jamiekt@users.noreply.github.com
+[push]
+  # Push new branches without extra flags
+	autoSetupRemote = true
+[alias]
+	# Better git blame across renames/whitespace
+	fblame = blame -w -C -C -C --color-by-age
+#[rerere]
+	# Reuse merge conflict resolutions
+#	enabled = true
+[branch]
+	# See branches by recent activity
+	sort = -committerdate
