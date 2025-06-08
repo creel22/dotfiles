@@ -1,8 +1,7 @@
 # This is Git's per-user configuration file.
 [user]
 # Please adapt and uncomment the following lines:
-	name = Jason Davis
-  email = creel22@hotmail.com
+	#name = <name>
 	#email = 854953+jamiekt@users.noreply.github.com
 [push]
   # Push new branches without extra flags
