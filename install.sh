@@ -1,8 +1,6 @@
 #!/bin/bash
 set -ex
 
-cat ./bashrc.additions >> ~/.bashrc
-
 cp ./.gitconfig ~
 git config --global commit.template ~/.gitmessage
 
@@ -33,4 +31,7 @@ rm -f ~/.zshrc
 mv ~/.zshrc.bak ~/.zshrc
 # update theme
 sed -i '/^ZSH_THEME/c\ZSH_THEME="agnoster"' ~/.zshrc
+
+
+cat ./bashrc.additions >> ~/.bashrc
 ########################################################################################################################
