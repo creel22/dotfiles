@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 cat bashrc.additions >> ~/.bashrc
 
