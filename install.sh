@@ -1,6 +1,8 @@
 #!/bin/bash
 set -ex
 
+cd "$(dirname "$0")"
+
 cp ./.gitconfig ~
 git config --global commit.template ~/.gitmessage
 
