@@ -34,4 +34,4 @@ if ! grep -q 'ZSH_THEME="agnoster"' ~/.zshrc; then
   sed -i 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/' ~/.zshrc
 fi
 
-cat ./bashrc.additions >> ~/.bashrc/
+cat ./bashrc.additions >> ~/.bashrc
