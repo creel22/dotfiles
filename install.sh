@@ -1,39 +1,37 @@
 #!/bin/bash
 set -ex
-
 cd "$(dirname "$0")"
 
-cp ./.gitconfig ~
+cp .gitconfig ~
 git config --global commit.template ~/.gitmessage
 
-# powerline fonts for zsh agnoster theme
-git clone https://github.com/powerline/fonts.git
-cd fonts
-./install.sh
-cd .. && rm -rf fonts
+# install powerline fonts if not present
+if [ ! -d ~/fonts ]; then
+  git clone https://github.com/powerline/fonts.git ~/fonts
+  bash ~/fonts/install.sh
+  rm -rf ~/fonts
+fi
 
-# oh-my-zsh & plugins
-wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-zsh -c 'git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions'
-zsh -c 'git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting'
-cp ./.zshrc ~
+# install oh-my-zsh only if not installed
+if [ ! -d ~/.oh-my-zsh ]; then
+  RUNZSH=no KEEP_ZSHRC=yes \
+    bash -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
+fi
 
-########################################################################################################################
-#### set agnoster as theme, this came from https://gist.github.com/corentinbettiol/21a6d4e942a0ee58d51acb7996697a88
-#### in vscode settings for devcontainer (not for User or Workspace), Search for terminal.integrated.fontFamily value, and set it to "Roboto Mono for Powerline" (or any of those: https://github.com/powerline/fonts#font-families font families).
-# save current zshrc
-mv ~/.zshrc ~/.zshrc.bak
+# install plugins
+ZSH_CUSTOM=${ZSH_CUSTOM:-~/.oh-my-zsh/custom}
 
-sudo sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -- \
-    -t agnoster
+[ -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ] || \
+  git clone https://github.com/zsh-users/zsh-autosuggestions "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
 
-# remove newly created zshrc
-rm -f ~/.zshrc
-# restore saved zshrc
-mv ~/.zshrc.bak ~/.zshrc
-# update theme
-sed -i '/^ZSH_THEME/c\ZSH_THEME="agnoster"' ~/.zshrc
+[ -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ] || \
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
 
+cp .zshrc ~
 
-cat ./bashrc.additions >> ~/.bashrc
-########################################################################################################################
+# Update theme to agnoster
+if ! grep -q 'ZSH_THEME="agnoster"' ~/.zshrc; then
+  sed -i 's/^ZSH_THEME=.*/ZSH_THEME="agnoster"/' ~/.zshrc
+fi
+
+cat ./bashrc.additions >> ~/.bashrc/
