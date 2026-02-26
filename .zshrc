@@ -100,7 +100,7 @@ source $ZSH/oh-my-zsh.sh
 alias gitlogonelinepretty='git log --pretty=format:"%C(yellow)%h %Cred%ad %Cblue%an %Cgreen%s" --date=short'
 alias glop=gitlogonelinepretty
 alias gitbranchclean='git remote prune origin && git branch --merged | egrep -v "(^\*|main|dev|master)" | xargs git branch -d'
-alias gitlogcurrentworkingdirectory='git log --oneline -- **/*'
+alias gitlogcurrentworkingdirectory='git log --oneline -- .'
 alias glcwd=gitlogcurrentworkingdirectory
 alias gprom='git pull --rebase origin master'
 alias hflabels='gh pr edit $(git rev-parse --abbrev-ref HEAD) --add-label "tribe: ${TRIBE}" --add-label "squad: ${SQUAD}"'
