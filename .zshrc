@@ -134,7 +134,7 @@ alias dexec='docker exec -ti'
 alias docps='docker ps -a'
 alias docdf='docker system df'
 alias dlogs='docker logs -tf --tail="50" '
-alias dips="docker ps -q | xargs -n 1 docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';"
+alias dips="docker ps -q | xargs docker inspect --format '{{ .Name }} {{range .NetworkSettings.Networks}} {{.IPAddress}}{{end}}' | sed 's#^/##';"
 
 # Docker Compose Wrapper Function
 dcrun() {
