@@ -43,6 +43,17 @@ def main [] {
             print "🖥️  Mac detected: Installing Workstation extras (Casks & VSCode)..."
             brew bundle --file=($dotfiles_root | path join "Brewfile.workstation")
         }
+
+        # Generate Broot launcher locally
+        if (which broot | is-not-empty) {
+            print "🌳 Generating Broot launcher..."
+            let broot_dir = ($config_dest | path join "broot/launcher/nushell")
+            mkdir $broot_dir
+            let br_path = ($broot_dir | path join "br")
+            broot --print-shell-function nushell 
+            | str replace "export def --env br" "export def --env main"
+            | save -f $br_path
+        }
     }
 
     print "✅ Installation Complete! Restart your shell to see changes."
