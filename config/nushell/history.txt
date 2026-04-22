@@ -14,3 +14,23 @@ cd dotfiles/
 ls
 cat install.sh 
 git pull
+ll
+gs
+gd
+gs
+ll
+gs
+ga .
+gs
+gc
+git commit
+gac
+gacm
+git alias 
+git commit
+gs
+gd
+ga .
+git commit
+gs
+git push
