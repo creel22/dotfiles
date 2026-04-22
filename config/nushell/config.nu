@@ -35,10 +35,15 @@ alias gc  = git commit
 alias gco = git checkout
 alias gwt = git worktree
 alias gwl = git worktree list
+alias glop = git log --pretty=format:"%C(yellow)%h %Cred%ad %Cblue%an %Cgreen%s" --date=short
 
 # Docker
-alias dcup = docker-compose up -d
-alias dcdwn = docker-compose down
+alias dcup = docker compose up -d
+alias dcdwn = docker compose down
+alias dcbuild = docker compose up -d --build --remove-orphans
+alias dcpull = docker compose pull
+alias dsysprune = docker system prune -a
+alias dvolprune = docker volume prune
 
 # ---------------------------------
 # Custom Commands
@@ -164,7 +169,29 @@ $env.config = ($env.config | upsert keybindings (
     ]
 ))
 
+# ---------------------------------
+# Direnv Integration
+# ---------------------------------
+$env.config = (
+    $env.config 
+    | upsert hooks.env_change.PWD [
+        { |before, after|
+            if (which direnv | is-not-empty) {
+                let envs = (direnv export json | from json | default {})
+                if ($envs | is-not-empty) {
+                    $envs | load-env
+                    if ($env.PATH | describe) == "string" {
+                        $env.PATH = ($env.PATH | split row (char env_sep))
+                    }
+                }
+            }
+        }
+    ]
+)
+
+# ---------------------------------
 # Interactive file search with preview
+# ---------------------------------
 def --env fzf-find [] {
     let selection = (
         fd --type f --hidden --exclude .git --exclude node_modules 

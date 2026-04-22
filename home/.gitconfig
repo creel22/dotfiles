@@ -9,10 +9,10 @@
 	rebase = true
 [credential "https://github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [push]
 	autoSetupRemote = true
 [alias]
@@ -21,6 +21,8 @@
 	sync = !git pull --rebase --autostash
 	sync-dev = !git fetch origin && git rebase origin/dev
 	cm = !EDITOR=true git commit
+	# Better git blame across renames/whitespace
+	fblame = blame -w -C -C -C --color-by-age
 [fetch]
 	prune = true
 [safe]
@@ -28,3 +30,6 @@
 	directory = /Users/jason/actions-runner/_work/budget-dashboard/budget-dashboard
 [core]
 	editor = true
+[branch]
+	# See branches by recent activity
+	sort = -committerdate

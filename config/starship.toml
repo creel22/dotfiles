@@ -41,7 +41,7 @@ style = "bold red"
 
 [python]
 symbol = " "
-format = "via [${symbol}${virtualenv}]($style) "
+format = "via [${symbol}${version}( \\(${virtualenv}\\))]($style) "
 style = "bold yellow"
 
 [nodejs]

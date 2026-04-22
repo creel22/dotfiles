@@ -28,7 +28,6 @@ $env.XDG_CACHE_HOME  = $"($env.HOME)/.cache"
 
 $env.EDITOR = "nvim"
 $env.VISUAL = "nvim"
-$env.UV_SYSTEM_PYTHON = "true"
 $env.DOCKER_BUILDKIT = "1"
 $env.COMPOSE_DOCKER_CLI_BUILD = "1"
 $env.LESS = "-R"

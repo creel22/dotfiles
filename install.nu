@@ -33,7 +33,25 @@ def main [] {
         }
     }
 
-    # 3. Brew Bundle
+    # 3. Symlink Bin scripts
+    let bin_src = ($dotfiles_root | path join "bin")
+    let local_bin_dest = ($env.HOME | path join ".local/bin")
+    
+    if not ($local_bin_dest | path exists) {
+        mkdir $local_bin_dest
+    }
+    
+    ls $bin_src | each { |item|
+        let target = ($local_bin_dest | path join ($item.name | path basename))
+        if ($target | path exists) {
+            print $"  - Skipping ($target) [already exists]"
+        } else {
+            print $"  - Symlinking ($item.name) -> ($target)"
+            ln -s $item.name $target
+        }
+    }
+
+    # 4. Brew Bundle
     if (which brew | is-not-empty) {
         print "🍺 Running Brew Bundle (Core)..."
         brew bundle --file=($dotfiles_root | path join "Brewfile")
@@ -50,6 +68,7 @@ def main [] {
             let broot_dir = ($config_dest | path join "broot/launcher/nushell")
             mkdir $broot_dir
             let br_path = ($broot_dir | path join "br")
+            rm -f $br_path # Ensure we're not fighting a symlink
             broot --print-shell-function nushell 
             | str replace "export def --env br" "export def --env main"
             | save -f $br_path

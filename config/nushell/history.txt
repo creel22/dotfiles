@@ -34,3 +34,55 @@ ga .
 git commit
 gs
 git push
+gh run watch<\n>
+gh run list<\n>
+watch -n 5 gh run list<\n>
+gh run list --branch dev
+gh run view 24800287405
+ssh homelab
+cdexecf
+dexecf
+gs
+gd
+git add .
+git commit
+ssh homelab 
+gs
+pwd
+gs
+gd
+gs
+git commit
+git push
+gs
+gd
+brew reinstall pre-commit python@3.14<\n>
+dexecf
+gs
+gd
+glop
+gws
+gs
+ga .
+git commit
+git push
+gs
+g
+gd
+btop
+htop
+top
+brew install btop
+btop
+btop
+br
+..
+cd budget-dashboard/
+which python
+cd ..
+exit
+exit
+pwd
+cd backend/
+cd ..
+ls
