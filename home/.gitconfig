@@ -1,0 +1,30 @@
+# This is Git's per-user configuration file.
+[user]
+	email = jd.jdavis@gmail.com
+	name = Jason Davis
+# Please adapt and uncomment the following lines:
+#	name = Jason Davis
+#	email = jd.jdavis@gmail.com
+[pull]
+	rebase = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[push]
+	autoSetupRemote = true
+[alias]
+	pr = !gh pr create --fill
+	cleanup = !git branch --merged | grep -v \"\\\\*\" | grep -v \"dev\" | xargs -n 1 git branch -d
+	sync = !git pull --rebase --autostash
+	sync-dev = !git fetch origin && git rebase origin/dev
+	cm = !EDITOR=true git commit
+[fetch]
+	prune = true
+[safe]
+	directory = /Users/jason/actions-runner/_work/budget-dashboard/budget-dashboard
+	directory = /Users/jason/actions-runner/_work/budget-dashboard/budget-dashboard
+[core]
+	editor = true

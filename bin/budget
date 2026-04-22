@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ENV="$1"
+shift
+
+BASE="$HOME/workspace/budget-dashboard/deploy"
+cd "$BASE"
+
+case "$ENV" in
+  staging)
+    exec docker compose \
+      -f docker-compose.base.yml \
+      -f docker-compose.staging.yml \
+      --env-file .env.staging \
+      "$@"
+    ;;
+  prod|production)
+    exec docker compose \
+      -f docker-compose.base.yml \
+      -f docker-compose.production.yml \
+      --env-file .env.production \
+      "$@"
+    ;;
+  *)
+    echo "Usage: budget {staging|prod} <args>"
+    exit 1
+    ;;
+esac

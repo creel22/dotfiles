@@ -1,0 +1,39 @@
+# ---------------------------------
+# Force Ghostty to use Nushell
+# ---------------------------------
+command = /opt/homebrew/bin/nu
+
+# ---------------------------------
+# Appearance
+# ---------------------------------
+theme = catppuccin-mocha.conf
+font-family = "JetBrainsMono Nerd Font"
+font-size = 14
+adjust-cell-height = 20%
+
+background-opacity = 0.7
+background-blur-radius = 20
+
+window-padding-x = 10
+window-padding-y = 10
+
+# ---------------------------------
+# Behavior
+# ---------------------------------
+copy-on-select = true
+macos-option-as-alt = true
+mouse-hide-while-typing = true
+window-decoration = true
+cursor-style = block
+cursor-style-blink = true
+
+# Shell Integration
+shell-integration = nushell
+shell-integration-features = cursor,sudo,no-title
+
+# ---------------------------------
+# Keybindings
+# ---------------------------------
+keybind = cmd+left=previous_tab
+keybind = cmd+right=next_tab
+

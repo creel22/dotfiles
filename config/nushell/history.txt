@@ -1,0 +1,16 @@
+exit
+cd workspace/budget-investments-2/
+vim ~/.config/nushell/env.nu
+exit
+nu
+exit
+nu
+nu
+vf
+br
+ll
+cd ..
+cd dotfiles/
+ls
+cat install.sh 
+git pull

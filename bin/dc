@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOCKER_DIR="${DOCKER_DIR:-$HOME/docker}"
+COMPOSE_FILE="${COMPOSE_FILE:-docker-compose-mac.yml}"
+
+cd "$DOCKER_DIR"
+exec docker compose --profile all -f "$COMPOSE_FILE" "$@"
