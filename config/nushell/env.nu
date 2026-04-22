@@ -38,6 +38,17 @@ $env.BAT_THEME = "Catppuccin Mocha"
 $env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"
 
 # ---------------------------------
+# Terminal Compatibility (for SSH)
+# ---------------------------------
+# If we are on a remote server and TERM is set to something unknown like 'ghostty',
+# fallback to xterm-256color so tools like 'git' and 'less' work correctly.
+if ($env | get -i TERM) == "ghostty" {
+    if not ("/usr/share/terminfo/g/ghostty" | path exists) {
+        $env.TERM = "xterm-256color"
+    }
+}
+
+# ---------------------------------
 # Generate Inits (Cached for speed)
 # ---------------------------------
 let starship_cache = ($nu.cache-dir | path join "starship")
