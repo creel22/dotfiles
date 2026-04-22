@@ -40,10 +40,11 @@ $env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"
 # ---------------------------------
 # Terminal Compatibility (for SSH)
 # ---------------------------------
-# If we are on a remote server and TERM is set to something unknown like 'ghostty',
-# fallback to xterm-256color so tools like 'git' and 'less' work correctly.
-if ($env | get -o TERM) == "ghostty" {
-    if not ("/usr/share/terminfo/g/ghostty" | path exists) {
+# If terminal is unknown or 'dumb', fallback to xterm-256color
+let current_term = ($env | get -o TERM | default "dumb")
+if ($current_term == "ghostty") or ($current_term == "dumb") {
+    # Check if ghostty terminfo is actually available
+    if not ("/usr/share/terminfo/g/ghostty" | path exists) and not ("/lib/terminfo/g/ghostty" | path exists) {
         $env.TERM = "xterm-256color"
     }
 }
