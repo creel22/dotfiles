@@ -32,7 +32,6 @@ brew "openblas"
 brew "openjdk"
 brew "pipx"
 brew "pkgconf"
-brew "pnpm"
 brew "pre-commit"
 brew "rclone"
 brew "redis", restart_service: :changed
@@ -48,5 +47,4 @@ brew "yt-dlp"
 brew "zoxide"
 uv "pre-commit", with: ["identify"]
 uv "pyright"
-npm "corepack"
-npm "neovim"
+
