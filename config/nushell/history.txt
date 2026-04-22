@@ -86,3 +86,5 @@ pwd
 cd backend/
 cd ..
 ls
+jq
+exit

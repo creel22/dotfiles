@@ -7,6 +7,8 @@
 #	email = jd.jdavis@gmail.com
 [pull]
 	rebase = true
+[rebase]
+	autoStash = true
 [credential "https://github.com"]
 	helper = 
 	helper = !gh auth git-credential
@@ -30,6 +32,14 @@
 	directory = /Users/jason/actions-runner/_work/budget-dashboard/budget-dashboard
 [core]
 	editor = true
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	light = false
+	side-by-side = true
+	line-numbers = true
 [branch]
 	# See branches by recent activity
 	sort = -committerdate

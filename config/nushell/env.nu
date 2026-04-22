@@ -35,6 +35,7 @@ $env.FZF_DEFAULT_OPTS = "--height 40% --layout=reverse --border --color=bg+:#313
 $env.FZF_DEFAULT_COMMAND = "fd --type f --strip-cwd-prefix --hidden --exclude .git"
 $env.BAT_THEME = "Catppuccin Mocha"
 $env.MANPAGER = "sh -c 'col -bx | bat -l man -p'"
+$env.PAGER = "bat"
 
 # ---------------------------------
 # Terminal Compatibility (for SSH)
