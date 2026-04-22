@@ -14,7 +14,7 @@ def main [] {
     ls $config_src | each { |item|
         let target = ($config_dest | path join ($item.name | path basename))
         if ($target | path exists) {
-            print $"  - Skipping ($target) (already exists)"
+            print $"  - Skipping ($target) [already exists]"
         } else {
             print $"  - Symlinking ($item.name) -> ($target)"
             ln -s $item.name $target
@@ -26,7 +26,7 @@ def main [] {
     ls -a $home_src | where name !~ `\.$` | each { |item|
         let target = ($env.HOME | path join ($item.name | path basename))
         if ($target | path exists) {
-            print $"  - Skipping ($target) (already exists)"
+            print $"  - Skipping ($target) [already exists]"
         } else {
             print $"  - Symlinking ($item.name) -> ($target)"
             ln -s $item.name $target
