@@ -13,6 +13,8 @@ $env.PATH = (
         $"($env.HOME)/.orbstack/bin"
         "/opt/homebrew/bin"
         "/opt/homebrew/sbin"
+        "/home/linuxbrew/.linuxbrew/bin"
+        "/home/linuxbrew/.linuxbrew/sbin"
     ]
     | uniq
 )
