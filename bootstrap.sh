@@ -17,7 +17,7 @@ fi
 # 2. Install Nushell if missing
 if ! command -v nu &> /dev/null; then
     echo "🐚 Installing Nushell..."
-    brew install nu
+    brew install nushell
 fi
 
 # 3. Hand off to the Nushell installer
