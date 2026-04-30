@@ -1,6 +1,6 @@
 #!/usr/bin/env nu
 
-def main [] {
+def main [...profiles: string] {
     let dotfiles_root = ($env.CURRENT_FILE | path dirname)
     
     print "🚀 Starting Dotfile Installation..."
@@ -53,13 +53,34 @@ def main [] {
 
     # 4. Brew Bundle
     if (which brew | is-not-empty) {
-        print "🍺 Running Brew Bundle (Core)..."
-        brew bundle --file=($dotfiles_root | path join "Brewfile")
+        let available_profiles = ["shell", "dev", "server", "media"]
+        mut selected_profiles = []
 
-        # Only install workstation extras on macOS (assumed workstation)
-        if ($nu.os-info.name == "macos") {
-            print "🖥️  Mac detected: Installing Workstation extras (Casks & VSCode)..."
-            brew bundle --file=($dotfiles_root | path join "Brewfile.workstation")
+        if ($profiles | is-empty) {
+            print "🍺 No profiles provided. Entering interactive mode..."
+            for p in $available_profiles {
+                let ans = (input $"Do you want to install the '($p)' profile? (y/N) ")
+                if ($ans | str downcase) == "y" {
+                    $selected_profiles = ($selected_profiles | append $p)
+                }
+            }
+        } else {
+            $selected_profiles = $profiles
+        }
+
+        if ($nu.os-info.name == "macos") and ("workstation" not-in $selected_profiles) {
+            print "🖥️  Mac detected: Automatically adding 'workstation' profile..."
+            $selected_profiles = ($selected_profiles | append "workstation")
+        }
+
+        for p in $selected_profiles {
+            let brewfile_path = ($dotfiles_root | path join $"Brewfile.($p)")
+            if ($brewfile_path | path exists) {
+                print $"🍺 Running Brew Bundle for ($p)..."
+                brew bundle --file=$brewfile_path
+            } else {
+                print $"⚠️ Warning: Brewfile.($p) not found!"
+            }
         }
 
         # Generate Broot launcher locally

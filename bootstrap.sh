@@ -22,4 +22,4 @@ fi
 
 # 3. Hand off to the Nushell installer
 echo "🏃 Handing off to install.nu..."
-nu "$(dirname "$0")/install.nu"
+nu "$(dirname "$0")/install.nu" "$@"

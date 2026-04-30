@@ -1,0 +1,6 @@
+brew "little-cms2"
+brew "ffmpeg"
+brew "jpeg-xl"
+brew "webp"
+brew "gd"
+brew "yt-dlp"
