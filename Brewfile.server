@@ -1,0 +1,12 @@
+brew "curl"
+brew "gnupg"
+brew "krb5"
+brew "libpq"
+brew "mysql-client"
+brew "nginx"
+brew "nmap"
+brew "rclone"
+brew "redis", restart_service: :changed
+brew "restic"
+brew "syncthing", restart_service: :changed
+brew "wget"
